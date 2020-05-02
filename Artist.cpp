@@ -8,6 +8,7 @@ Artist::Artist(int artist_id, int numOfSongs) {
     artistId = artist_id;
     this->numOfSongs = numOfSongs;
     songList = SongList(artist_id,numOfSongs); //whoever tries to create this needs to try and catch
+    //comment
 }
 
 
