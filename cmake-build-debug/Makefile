@@ -203,6 +203,33 @@ Song.cpp.s:
 	$(MAKE) -f CMakeFiles\wet2.dir\build.make CMakeFiles/wet2.dir/Song.cpp.s
 .PHONY : Song.cpp.s
 
+StreamNode.obj: StreamNode.cpp.obj
+
+.PHONY : StreamNode.obj
+
+# target to build an object file
+StreamNode.cpp.obj:
+	$(MAKE) -f CMakeFiles\wet2.dir\build.make CMakeFiles/wet2.dir/StreamNode.cpp.obj
+.PHONY : StreamNode.cpp.obj
+
+StreamNode.i: StreamNode.cpp.i
+
+.PHONY : StreamNode.i
+
+# target to preprocess a source file
+StreamNode.cpp.i:
+	$(MAKE) -f CMakeFiles\wet2.dir\build.make CMakeFiles/wet2.dir/StreamNode.cpp.i
+.PHONY : StreamNode.cpp.i
+
+StreamNode.s: StreamNode.cpp.s
+
+.PHONY : StreamNode.s
+
+# target to generate assembly for a file
+StreamNode.cpp.s:
+	$(MAKE) -f CMakeFiles\wet2.dir\build.make CMakeFiles/wet2.dir/StreamNode.cpp.s
+.PHONY : StreamNode.cpp.s
+
 diesesystem.obj: diesesystem.cpp.obj
 
 .PHONY : diesesystem.obj
@@ -302,6 +329,9 @@ help:
 	@echo ... Song.obj
 	@echo ... Song.i
 	@echo ... Song.s
+	@echo ... StreamNode.obj
+	@echo ... StreamNode.i
+	@echo ... StreamNode.s
 	@echo ... diesesystem.obj
 	@echo ... diesesystem.i
 	@echo ... diesesystem.s

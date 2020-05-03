@@ -6,11 +6,12 @@
 #define WET2_SONG_H
 #include "Artist.h"
 
-typedef greatestHits<StreamTree>::GHNode streamNode;
+
+
 class Song {
 public:
     int id;
-    streamNode streamNode;
+    streamNode ListNode;
 };
 
 Class compareSong{
@@ -23,5 +24,7 @@ Class compareSong{
         }
     }
 };
+
+
 
 #endif //WET2_SONG_H

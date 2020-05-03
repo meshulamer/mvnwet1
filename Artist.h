@@ -10,22 +10,21 @@
 #include "DSAVLTree.h"
 #include "Song.h"
 #include <stdio.h>
+#include "diesesystem.h"
 
-typedef DSAVLTree<Song,compareSong> SongTree;
-typedef greatestHits<StreamTree>::GHNode streamNode;
 class Artist {
 
 public:
     Artist(int artistId);
     Artist(const Artist& artist) = default;
-    Artist(int artist_id, int numOfSongs, streamNode* node0);
+    Artist(int artist_id, int numOfSongs, ListNode* node0);
     ~Artist();
     Artist& operator = (const Artist& artist) = delete;
     Artist* clone();
     int getId() const{
         return artistId;
     }
-    void addSongCount(int songid);
+    void addSongCount(int songId);
 class INVALID_INPUT : public std::exception{
     const char* what() const throw(){
         return "Invalid Input";
@@ -40,8 +39,8 @@ class OUT_OF_MEM : public std::exception{
 private:
     int artistId;
     int songNum;
-    Song** songList;
     SongTree songTree;
+    Song** songList;
 };
 
 

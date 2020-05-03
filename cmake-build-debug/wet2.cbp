@@ -98,6 +98,12 @@
 		<Unit filename="C:/Users/meshu/CLionProjects/mvn/wet2/Song.h">
 			<Option target="wet2"/>
 		</Unit>
+		<Unit filename="C:/Users/meshu/CLionProjects/mvn/wet2/StreamNode.cpp">
+			<Option target="wet2"/>
+		</Unit>
+		<Unit filename="C:/Users/meshu/CLionProjects/mvn/wet2/StreamNode.h">
+			<Option target="wet2"/>
+		</Unit>
 		<Unit filename="C:/Users/meshu/CLionProjects/mvn/wet2/diesesystem.cpp">
 			<Option target="wet2"/>
 		</Unit>

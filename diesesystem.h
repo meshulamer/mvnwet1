@@ -11,7 +11,11 @@
 #include "DSAVLTree.h"
 
 typedef DSAVLTree<Artist,artistCompare> ArtistTree;
-typedef greatestHits<DSAVLTree<Artist*,artistPtrCompare>> GreatestHitList;
+typedef DSAVLTree<Song,compareSong> SongTree;
+typedef DSAVLTree<StreamNode,compareStreamNode> StreamTree;
+typedef greatestHits<StreamTree> GreatestHitList;
+typedef greatestHits<StreamTree>::GHNode ListNode;
+
 class DSI{
 public:
     ArtistTree ArtistTree;
@@ -19,6 +23,6 @@ public:
     void addArtist(int artistID, int numOfSongs);
 
 };
-
+StatusType handelError(const std::string& what);
 
 #endif //WET2_DIESESYSTEM_H
