@@ -176,6 +176,33 @@ DSAVLTree.cpp.s:
 	$(MAKE) -f CMakeFiles\wet2.dir\build.make CMakeFiles/wet2.dir/DSAVLTree.cpp.s
 .PHONY : DSAVLTree.cpp.s
 
+Song.obj: Song.cpp.obj
+
+.PHONY : Song.obj
+
+# target to build an object file
+Song.cpp.obj:
+	$(MAKE) -f CMakeFiles\wet2.dir\build.make CMakeFiles/wet2.dir/Song.cpp.obj
+.PHONY : Song.cpp.obj
+
+Song.i: Song.cpp.i
+
+.PHONY : Song.i
+
+# target to preprocess a source file
+Song.cpp.i:
+	$(MAKE) -f CMakeFiles\wet2.dir\build.make CMakeFiles/wet2.dir/Song.cpp.i
+.PHONY : Song.cpp.i
+
+Song.s: Song.cpp.s
+
+.PHONY : Song.s
+
+# target to generate assembly for a file
+Song.cpp.s:
+	$(MAKE) -f CMakeFiles\wet2.dir\build.make CMakeFiles/wet2.dir/Song.cpp.s
+.PHONY : Song.cpp.s
+
 diesesystem.obj: diesesystem.cpp.obj
 
 .PHONY : diesesystem.obj
@@ -230,33 +257,6 @@ greatestHits.cpp.s:
 	$(MAKE) -f CMakeFiles\wet2.dir\build.make CMakeFiles/wet2.dir/greatestHits.cpp.s
 .PHONY : greatestHits.cpp.s
 
-library1imp.obj: library1imp.cpp.obj
-
-.PHONY : library1imp.obj
-
-# target to build an object file
-library1imp.cpp.obj:
-	$(MAKE) -f CMakeFiles\wet2.dir\build.make CMakeFiles/wet2.dir/library1imp.cpp.obj
-.PHONY : library1imp.cpp.obj
-
-library1imp.i: library1imp.cpp.i
-
-.PHONY : library1imp.i
-
-# target to preprocess a source file
-library1imp.cpp.i:
-	$(MAKE) -f CMakeFiles\wet2.dir\build.make CMakeFiles/wet2.dir/library1imp.cpp.i
-.PHONY : library1imp.cpp.i
-
-library1imp.s: library1imp.cpp.s
-
-.PHONY : library1imp.s
-
-# target to generate assembly for a file
-library1imp.cpp.s:
-	$(MAKE) -f CMakeFiles\wet2.dir\build.make CMakeFiles/wet2.dir/library1imp.cpp.s
-.PHONY : library1imp.cpp.s
-
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -299,15 +299,15 @@ help:
 	@echo ... DSAVLTree.obj
 	@echo ... DSAVLTree.i
 	@echo ... DSAVLTree.s
+	@echo ... Song.obj
+	@echo ... Song.i
+	@echo ... Song.s
 	@echo ... diesesystem.obj
 	@echo ... diesesystem.i
 	@echo ... diesesystem.s
 	@echo ... greatestHits.obj
 	@echo ... greatestHits.i
 	@echo ... greatestHits.s
-	@echo ... library1imp.obj
-	@echo ... library1imp.i
-	@echo ... library1imp.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

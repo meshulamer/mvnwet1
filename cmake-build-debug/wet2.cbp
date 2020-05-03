@@ -92,6 +92,12 @@
 		<Unit filename="C:/Users/meshu/CLionProjects/mvn/wet2/DSAVLTree.h">
 			<Option target="wet2"/>
 		</Unit>
+		<Unit filename="C:/Users/meshu/CLionProjects/mvn/wet2/Song.cpp">
+			<Option target="wet2"/>
+		</Unit>
+		<Unit filename="C:/Users/meshu/CLionProjects/mvn/wet2/Song.h">
+			<Option target="wet2"/>
+		</Unit>
 		<Unit filename="C:/Users/meshu/CLionProjects/mvn/wet2/diesesystem.cpp">
 			<Option target="wet2"/>
 		</Unit>
@@ -105,9 +111,6 @@
 			<Option target="wet2"/>
 		</Unit>
 		<Unit filename="C:/Users/meshu/CLionProjects/mvn/wet2/library1.h">
-			<Option target="wet2"/>
-		</Unit>
-		<Unit filename="C:/Users/meshu/CLionProjects/mvn/wet2/library1imp.cpp">
 			<Option target="wet2"/>
 		</Unit>
 		<Unit filename="C:/Users/meshu/CLionProjects/mvn/wet2/main.cpp">

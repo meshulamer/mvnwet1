@@ -7,12 +7,17 @@
 
 #include "greatestHits.h"
 #include "Artist.h"
+#include "library1.h"
+#include "DSAVLTree.h"
 
-typedef DSAVLTree<int,int,Artist> ArtistTree;
-class DS{
+typedef DSAVLTree<int,int,Artist,,> ArtistTree;
+class DSI{
 private:
     ArtistTree ArtistTree;
     greatestHits gh;
+public:
+    void addArtist(int artistID, int numOfSongs);
+
 }
 
 
