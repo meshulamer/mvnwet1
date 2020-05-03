@@ -9,24 +9,39 @@
 #include "greatestHits.h"
 #include "DSAVLTree.h"
 #include "Song.h"
+#include <stdio.h>
 
-
+typedef DSAVLTree<Song,compareSong> SongTree;
+typedef greatestHits<StreamTree>::GHNode streamNode;
 class Artist {
 
 public:
-    Artist(int artist_id, int numOfSongs);
+    Artist(int artistId);
     Artist(const Artist& artist) = default;
-    ~Artist(){}
+    Artist(int artist_id, int numOfSongs, streamNode* node0);
+    ~Artist();
     Artist& operator = (const Artist& artist) = delete;
+    Artist* clone();
     int getId() const{
         return artistId;
     }
-class INVALID_INPUT : public std::exception{};
+    void addSongCount(int songid);
+class INVALID_INPUT : public std::exception{
+    const char* what() const throw(){
+        return "Invalid Input";
+    }
+};
+class OUT_OF_MEM : public std::exception{
+    const char* what() const throw(){
+        return "Out Of Memory";
+    }
+};
 
 private:
     int artistId;
     int songNum;
-    Song* SongList;
+    Song** songList;
+    SongTree songTree;
 };
 
 
@@ -36,7 +51,13 @@ class artistCompare{
     }
 };
 
+class artistPtrCompare{
+    int operator()(const Artist* a,const Artist* b){
+       return artistCompare(*a,*b);
+    }
+};
 typedef DSAVLTree<Artist&, artistCompare> StreamTree;
+
 
 
 

@@ -21,11 +21,15 @@ public:
         GHNode* prev;
     };
     greatestHits(){
-        min = new(GHNode);
-        max = min;
-        min->next = min->prev = nullptr;
-        min->key =0;
-
+        try {
+            min = new(GHNode);
+            max = min;
+            min->next = min->prev = nullptr;
+            min->key = 0;
+        }
+        catch(...){
+            throw OUT_OF_MEM();
+        }
     }
 
     ~greatestHits(){
@@ -39,24 +43,40 @@ public:
 
     }
 
-    GHNode* getmin(){
+    GHNode* getMin(){
         return min;
     }
-    GHNode* getmax(){
+    GHNode* getMax(){
         return max;
     }
-
     static GHNode* advance(GHNode& node){
-        if(node.next == nullptr||node.key + 1 != node.next.key) {
-            GHNode *end_chain = node.next;
-            GHNode *new_chain = node.next = new(GHNode);
-            new_chain->next = end_chain;
-            end_chain->prev = new_chain;
-            new_chain->key = node.key + 1;
-            return new_chain;
+        try {
+            if (node.next == nullptr || node.key + 1 != node.next.key) {
+                GHNode *end_chain = node.next;
+                GHNode *new_chain = node.next = new(GHNode);
+                new_chain->next = end_chain;
+                if(endchain!= nullptr) {
+                    end_chain->prev = new_chain;
+                }
+                else{
+                    max = new_chain;
+                }
+                new_chain->key = node.key + 1;
+                return new_chain;
+            }
+            return node.next;
         }
-        return node.next;
+        catch(...){
+            throw OUT_OF_MEM();
+
         }
+
+    }
+    class OUT_OF_MEM : public std::exception{
+        const char* what() const throw(){
+            return "Out Of Memory";
+        }
+    };
     private:
         GHNode* min;
         GHNode* max;
@@ -64,6 +84,7 @@ public:
 };
 
 void removeGHNode(greatestHits<class T>::GHNode* node){
+    if(node.key==0) return;
     node.prev.next = node.next;
     if(node.next!= nullptr){
         node.next.prev = node.prev;

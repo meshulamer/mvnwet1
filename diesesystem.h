@@ -10,15 +10,15 @@
 #include "library1.h"
 #include "DSAVLTree.h"
 
-typedef DSAVLTree<int,int,Artist,,> ArtistTree;
+typedef DSAVLTree<Artist,artistCompare> ArtistTree;
+typedef greatestHits<DSAVLTree<Artist*,artistPtrCompare>> GreatestHitList;
 class DSI{
-private:
-    ArtistTree ArtistTree;
-    greatestHits gh;
 public:
+    ArtistTree ArtistTree;
+    GreatestHitList GHList;
     void addArtist(int artistID, int numOfSongs);
 
-}
+};
 
 
 #endif //WET2_DIESESYSTEM_H
