@@ -5,10 +5,13 @@
 #include "Artist.h"
 #include "Song.h"
 #include "diesesystem.h"
+#include "streamNode.h"
+#include "assert.h"
+#include "string"
 
-typedef greatestHits<StreamTree>::GHNode streamNode;
-Artist::Artist(int artist_id, int numOfSongs, ListNode *node0):artistId(artist_id),songNum(numOfSongs),
-        songTree(numOfSongs, node0) {
+
+Artist::Artist(int artist_id, int numOfSongs, ListNode &node0):artistId(artist_id),songNum(numOfSongs),
+        songTree(numOfSongs, Generate(node0)) {
     if (artist_id <= 0 || numOfSongs <= 0) throw INVALID_INPUT();
     artistId = artist_id;
     songNum = numOfSongs;
@@ -28,12 +31,13 @@ Artist::Artist(int artist_id, int numOfSongs, ListNode *node0):artistId(artist_i
     }
 }
 
+
 Artist::~Artist() {
     for(int i=0; i<songNum;i++){
         if (songList[i]==nullptr) continue;
-        songList[i]->ListNode.element.removeElement(artistId);
-        if(songList[i]->ListNode.element.getTreeSize()==0){
-            removeGHNode(songList[i]->ListNode);
+        songList[i]->listNode.element.removeElement(artistId);
+        if(songList[i]->listNode.element.getTreeSize()==0){
+            removeGHNode(songList[i]->listNode);
         }
         delete songList;
     }
@@ -41,7 +45,7 @@ Artist::~Artist() {
 
 Artist *Artist::clone() {
     try{
-        Artist* temp = new Artist(artistId,songNum,songList[0]->ListNode);
+        Artist* temp = new Artist(artistId,songNum,songList[0]->listNode);
         return temp;
     }
     catch(...){
@@ -57,17 +61,46 @@ Artist::Artist(int artistId) {
 }
 
 void Artist::addSongCount(int songId) {
-    Song& song = songList[songId]->ListNode;
     if(songId >= songNum || songId < 0) throw INVALID_INPUT();
+    ListNode& currentNode = songList[songId]->listNode;
     try {
-        streamNode& current_Node = advance(song.ListNode);
-        streamNode& find = song.ListNode.element.findElement(artistId);
+        ListNode& nextNode = advance(currentNode);
+        assert(currentNode.key == nextNode.key +1);
+        StreamNode tempSNode(this,1);
+        StreamNode& SNode = currentNode.element.findElement(tempSNode);
+        if(SNode.songNum == 1){
+            currentNode.element.removeElement(SNode);
+        }
+        else{
+            SNode.songNum--;
+        }
+        try {
+            StreamNode& nodeToAdjust = nextNode.element.findElement(tempSNode);
+            nodeToAdjust.songNum++;
+        }
+        catch(std::exception& e){
+            std::string s= e.what();
+            if(s=="Failure"){
+                nextNode.element.addElement(tempSNode);
+            }
 
+        }
     }
     catch(...){
         throw OUT_OF_MEM();
     }
-    assert(song.ListNode.key == song.ListNode.key +1);
+}
+
+void Artist::resetList() {
+    for(int i=0; i<songNum;i++){
+        songList[i]= nullptr;
+    }
+
+}
+
+int Artist::getStreamNum(int songId) {
+    return songList[songId]->listNode.key;
+
 }
 
 

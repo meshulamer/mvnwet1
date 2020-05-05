@@ -9,10 +9,14 @@
 
 class StreamNode {
 public:
-    Artist& artist;
+    Artist* artist;
     int songNum;
-    explicit StreamNode(Artist& artist,int songNum);
+    StreamNode(Artist* artist, int songNum);
     StreamNode* clone();
+};
+
+class compareStreamNode{
+    int operator()(const StreamNode& s1,const StreamNode& s2);
 };
 
 

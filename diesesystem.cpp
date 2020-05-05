@@ -56,8 +56,8 @@ StatusType AddToSongCount(void *DS, int artistID, int songID){
     try {
         DSI *sys = static_cast<DSI *>(DS);
         Artist dummyArtist(artistID);
-        Artist& a = sys->ArtistTree.findElement(dummyArtist);
-        a.addSongCount(songID);
+        Artist& artist = sys->ArtistTree.findElement(dummyArtist);
+        artist.addSongCount(songID);
         return SUCCESS;
     }
     catch(std::exception& e) {
@@ -67,11 +67,43 @@ StatusType AddToSongCount(void *DS, int artistID, int songID){
 
 }
 
-StatusType NumberOfStreams(void *DS, int artistID, int songID, int *streams){}
+StatusType NumberOfStreams(void *DS, int artistID, int songID, int *streams){
+    try {
+        DSI *sys = static_cast<DSI *>(DS);
+        Artist dummyArtist(artistID);
+        Artist& artist = sys->ArtistTree.findElement(dummyArtist);
+        artist.getStreamNum(songID);
+        return SUCCESS;
 
-StatusType GetRecommendedSongs(void *DS, int numOfSongs, int *artists, int *songs);
+    }
+    catch(std::exception& e) {
+        std::string what =e.what();
+        handelError(what);
+    }
+}
+
+StatusType GetRecommendedSongs(void *DS, int numOfSongs, int *artists, int *songs){
+    try {
+        DSI *sys = static_cast<DSI *>(DS);
+        ListNode& node = sys->GHList.getMax();
+
+    }
+    catch(std::exception& e) {
+        std::string what =e.what();
+        handelError(what);
+    }
+}
 
 void Quit(void** DS){
+    try {
+        DSI *sys = static_cast<DSI *>(*DS);
+        delete sys;
+        *DS = nullptr;
+    }
+    catch(std::exception& e) {
+        std::string what =e.what();
+        handelError(what);
+    }
 
 }
 /****************************************************************************/
@@ -89,7 +121,8 @@ StatusType handelError(const std::string& what){
 
 void DSI::addArtist(int artistID, int numOfSongs){
     Artist tempArtist(artistID, numOfSongs, GHList.getMin());
-        ArtistTree.insert(tempArtist);
+    ArtistTree.insert(tempArtist);
+    tempArtist.resetList();
 }
 //
 // Created by meshu on 29/04/2020.

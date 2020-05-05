@@ -9,6 +9,8 @@
 #include "Artist.h"
 #include "library1.h"
 #include "DSAVLTree.h"
+#include "StreamNode.h"
+#include "Song.h"
 
 typedef DSAVLTree<Artist,artistCompare> ArtistTree;
 typedef DSAVLTree<Song,compareSong> SongTree;

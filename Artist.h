@@ -17,7 +17,7 @@ class Artist {
 public:
     Artist(int artistId);
     Artist(const Artist& artist) = default;
-    Artist(int artist_id, int numOfSongs, ListNode* node0);
+    Artist(int artist_id, int numOfSongs, ListNode& node0);
     ~Artist();
     Artist& operator = (const Artist& artist) = delete;
     Artist* clone();
@@ -25,6 +25,8 @@ public:
         return artistId;
     }
     void addSongCount(int songId);
+    void resetList();
+    int getStreamNum(int songId);
 class INVALID_INPUT : public std::exception{
     const char* what() const throw(){
         return "Invalid Input";
@@ -41,6 +43,7 @@ private:
     int songNum;
     SongTree songTree;
     Song** songList;
+
 };
 
 
