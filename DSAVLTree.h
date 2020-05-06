@@ -292,7 +292,7 @@ public:
         }
         return (findNode(t))->keyT;
     }
-    template <class doSomething>
+
     T* startInorder(){
         iterator = min;
         return min->keyT;
