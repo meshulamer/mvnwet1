@@ -14,6 +14,13 @@
 
 class Artist {
 
+private:
+    int artistId;
+    int songNum;
+    SongTree songTree;
+    Song** songList;
+    bool duringPrint = false;
+
 public:
     Artist(int artistId);
     Artist(const Artist& artist) = default;
@@ -27,6 +34,9 @@ public:
     void addSongCount(int songId);
     void resetList();
     int getStreamNum(int songId);
+    int getSongNum();
+    int hitListIterator(int streamNum);
+
 class INVALID_INPUT : public std::exception{
     const char* what() const throw(){
         return "Invalid Input";
@@ -38,12 +48,6 @@ class OUT_OF_MEM : public std::exception{
     }
 };
 
-private:
-    int artistId;
-    int songNum;
-    SongTree songTree;
-    Song** songList;
-
 };
 
 
@@ -53,12 +57,7 @@ class artistCompare{
     }
 };
 
-class artistPtrCompare{
-    int operator()(const Artist* a,const Artist* b){
-       return artistCompare(*a,*b);
-    }
 };
-typedef DSAVLTree<Artist&, artistCompare> StreamTree;
 
 
 

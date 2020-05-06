@@ -42,7 +42,14 @@ public:
         }
 
     }
-
+    static void removeGHNode(GHNode* node){
+        if(node.key==0) return;
+        node.prev.next = node.next;
+        if(node.next!= nullptr){
+            node.next.prev = node.prev;
+            delete node;
+        }
+    }
     GHNode& getMin(){
         return (*min)&;
     }
@@ -55,52 +62,32 @@ public:
             return "Out Of Memory";
         }
     };
+    static GHNode* advance(GHNode& node) {
+        try {
+            if (node.next == nullptr || node.key + 1 != node.next.key) {
+                GHNode *end_chain = node.next;
+                GHNode *new_chain = node.next = new(GHNode);
+                new_chain->next = end_chain;
+                if (end_chain != nullptr) {
+                    end_chain->prev = new_chain;
+                } else {
+                    node.max = new_chain;
+                }
+                new_chain->key = node.key + 1;
+                return new_chain;
+            }
+            return node.next;
+        }
+        catch (...) {
+            throw OUT_OF_MEM();
+        }
+    }
     private:
         GHNode* min;
         GHNode* max;
 
 };
 
-void removeGHNode(greatestHits<class T>::GHNode* node){
-    if(node.key==0) return;
-    node.prev.next = node.next;
-    if(node.next!= nullptr){
-        node.next.prev = node.prev;
-        delete node;
-    }
-}
-static GHNode* advance(GHNode& node){
-    try {
-        if (node.next == nullptr || node.key + 1 != node.next.key) {
-            GHNode *end_chain = node.next;
-            GHNode *new_chain = node.next = new(GHNode);
-            new_chain->next = end_chain;
-            if(endchain!= nullptr) {
-                end_chain->prev = new_chain;
-            }
-            else{
-                max = new_chain;
-            }
-            new_chain->key = node.key + 1;
-            return new_chain;
-        }
-        return node.next;
-    }
-    catch(...){
-        throw OUT_OF_MEM();
 
-    }
-
-}
-
-template <class T>
-void removeGHNode(greatestHits<class T>::GHNode* node){
-    if(node.key==0) return;
-    node.prev.next = node.next;
-    if(node.next!= nullptr){
-        node.next.prev = node.prev;
-        delete node;
-    }
-}
 
 #endif //WET2_GREATESTHITS_H

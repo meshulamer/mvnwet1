@@ -31,6 +31,7 @@ StatusType AddArtist(void *DS, int artistID, int numOfSongs){
     try {
         DSI *sys = static_cast<DSI *>(DS);
         (*sys).addArtist(artistID, numOfSongs);
+        sys->totalNumOfSongs += numOfSongs;
         return SUCCESS;
     }
     catch(std::exception& e) {
@@ -42,7 +43,11 @@ StatusType AddArtist(void *DS, int artistID, int numOfSongs){
 StatusType RemoveArtist(void *DS, int artistID){
     try {
         DSI *sys = static_cast<DSI *>(DS);
-        sys->ArtistTree.removeElement(artistID);
+        Artist dummyArtist(artistID);
+        Artist& artist = sys->ArtistTree.findElement(dummyArtist);
+        int numOfArtistSongs = artist.getSongNum();
+        sys->ArtistTree.removeElement(dummyArtist);
+        sys->totalNumOfSongs -= numOfArtistSongs;
         return SUCCESS;
     }
     catch(std::exception& e) {
@@ -86,7 +91,9 @@ StatusType GetRecommendedSongs(void *DS, int numOfSongs, int *artists, int *song
     try {
         DSI *sys = static_cast<DSI *>(DS);
         ListNode& node = sys->GHList.getMax();
-
+        if(sys->totalNumOfSongs<numOfSongs) return FAILURE;
+        Recommended(numOfSongs,artists, songs);
+        return SUCCESS;
     }
     catch(std::exception& e) {
         std::string what =e.what();
@@ -123,6 +130,28 @@ void DSI::addArtist(int artistID, int numOfSongs){
     Artist tempArtist(artistID, numOfSongs, GHList.getMin());
     ArtistTree.insert(tempArtist);
     tempArtist.resetList();
+}
+void Recommended(GreatestHitList& HL, int numOfSongs, int*artists, int*songs){
+    ListNode* start = &HL.getMax();
+    int i =0;
+    int j = 0;
+    while(start){
+        StreamNode* streamIterator = start->element.startInorder();
+        while(streamIterator){
+            Artist* artist = streamIterator->artist;
+            int songCounter = streamIterator->songNum;
+            for (int t=0; t<songCounter; t++){
+                artists[i]= artist->getId();
+                i++;
+            }
+            for(int t=0; t<songCounter; t++){
+                songs[j] = artist->hitListIterator(start->key);
+                j++;
+            }
+            streamIterator = start->element.inorderGetNext();
+        }
+        start = start->prev;
+    }
 }
 //
 // Created by meshu on 29/04/2020.

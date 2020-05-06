@@ -12,9 +12,9 @@
 #include "StreamNode.h"
 #include "Song.h"
 
-typedef DSAVLTree<Artist,artistCompare> ArtistTree;
-typedef DSAVLTree<Song,compareSong> SongTree;
-typedef DSAVLTree<StreamNode,compareStreamNode> StreamTree;
+typedef DSAVLTree<Artist, artistCompare> ArtistTree;
+typedef DSAVLTree<Song, compareSong> SongTree;
+typedef DSAVLTree<StreamNode, compareStreamNode> StreamTree;
 typedef greatestHits<StreamTree> GreatestHitList;
 typedef greatestHits<StreamTree>::GHNode ListNode;
 
@@ -23,8 +23,9 @@ public:
     ArtistTree ArtistTree;
     GreatestHitList GHList;
     void addArtist(int artistID, int numOfSongs);
+    int totalNumOfSongs = 0;
 
 };
 StatusType handelError(const std::string& what);
-
+void Recommended(GreatestHitList& HL, int numOfSongs, int*artists, int*songs);
 #endif //WET2_DIESESYSTEM_H

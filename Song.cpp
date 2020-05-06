@@ -16,9 +16,9 @@ Song *Song::clone() {
 }
 
 int compareSong::operator()(const Song& s1, const Song& s2){
-    int first_comp = s1.listNode.key - s2.listNode.key;
-    if (first_comp = 0) {
-        return s1.id - s2.id;
+    int first_comp = s2.listNode.key - s1.listNode.key;
+    if (first_comp == 0) {
+        return s1.id-s2.id;
     }
     return first_comp;
 }
